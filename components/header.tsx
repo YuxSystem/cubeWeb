@@ -6,11 +6,25 @@ import { Button } from "@/components/ui/button"
 import { Menu, X, ChevronDown } from "lucide-react"
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion"
 import { cn } from "@/lib/utils"
+import { useTranslation } from "next-i18next"
+import { useRouter } from "next/router"
 
 export default function Header() {
+  const { t } = useTranslation("common")
+  const router = useRouter()
+
   const [isScrolled, setIsScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
+
+  const languages = [
+    { code: "pt", name: "PT", flag: "🇧🇷" },
+    { code: "en", name: "EN", flag: "🇺🇸" },
+    { code: "es", name: "ES", flag: "🇪🇸" },
+  ]
+
+  const [currentLanguage, setCurrentLanguage] = useState(router.locale || "pt")
+
   const headerRef = useRef<HTMLDivElement>(null)
 
   const { scrollY } = useScroll()
@@ -27,27 +41,34 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
+  useEffect(() => {
+    // Update currentLanguage when router.locale changes
+    if (router.locale) {
+      setCurrentLanguage(router.locale)
+    }
+  }, [router.locale])
+
   const navItems = [
     {
-      name: "Products",
+      name: t("header.products"),
       href: "#products",
       dropdown: [
-        { name: "CRM Suite", href: "#crm-suite" },
-        { name: "Sales Analytics", href: "#sales-analytics" },
-        { name: "Customer Insights", href: "#customer-insights" },
+        { name: t("header.dropdown.crmSuite"), href: "#crm-suite" },
+        { name: t("header.dropdown.salesAnalytics"), href: "#sales-analytics" },
+        { name: t("header.dropdown.customerInsights"), href: "#customer-insights" },
       ],
     },
     {
-      name: "Solutions",
+      name: t("header.solutions"),
       href: "#solutions",
       dropdown: [
-        { name: "For Startups", href: "#for-startups" },
-        { name: "For Enterprise", href: "#for-enterprise" },
-        { name: "For Agencies", href: "#for-agencies" },
+        { name: t("header.dropdown.forStartups"), href: "#for-startups" },
+        { name: t("header.dropdown.forEnterprise"), href: "#for-enterprise" },
+        { name: t("header.dropdown.forAgencies"), href: "#for-agencies" },
       ],
     },
-    { name: "Resources", href: "#resources" },
-    { name: "Pricing", href: "#pricing" },
+    { name: t("header.resources"), href: "#resources" },
+    { name: t("header.pricing"), href: "#pricing" },
   ]
 
   const handleDropdownToggle = (name: string) => {
@@ -56,6 +77,11 @@ export default function Header() {
     } else {
       setActiveDropdown(name)
     }
+  }
+
+  const changeLanguage = (langCode: string) => {
+    setCurrentLanguage(langCode)
+    router.push(router.pathname, router.asPath, { locale: langCode })
   }
 
   return (
@@ -147,6 +173,22 @@ export default function Header() {
                 )}
               </div>
             ))}
+            <div className="flex items-center space-x-1 ml-8">
+              {languages.map((lang) => (
+                <motion.button
+                  key={lang.code}
+                  onClick={() => changeLanguage(lang.code)}
+                  className={`px-2 py-1 rounded-full text-sm flex items-center ${
+                    currentLanguage === lang.code ? "bg-blue-100 text-blue-600" : "text-gray-600 hover:bg-gray-100"
+                  }`}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <span className="mr-1">{lang.flag}</span>
+                  <span className="font-medium">{lang.name}</span>
+                </motion.button>
+              ))}
+            </div>
           </motion.nav>
 
           <motion.div
@@ -156,14 +198,14 @@ export default function Header() {
             className="hidden md:flex items-center space-x-4"
           >
             <Link href="#" className="text-gray-700 hover:text-blue-600 font-medium transition-colors">
-              Login
+              {t("header.login")}
             </Link>
             <Button
               className="bg-gradient-blue hover:opacity-90 shadow-neon-blue"
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 400, damping: 10 }}
             >
-              Get Started
+              {t("header.getStarted")}
             </Button>
           </motion.div>
 
@@ -247,9 +289,29 @@ export default function Header() {
                   className="block py-2 text-gray-700 hover:text-blue-600 font-medium"
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  Login
+                  {t("header.login")}
                 </Link>
-                <Button className="w-full mt-2 bg-gradient-blue hover:opacity-90 shadow-neon-blue">Get Started</Button>
+                <Button className="w-full mt-2 bg-gradient-blue hover:opacity-90 shadow-neon-blue">
+                  {t("header.getStarted")}
+                </Button>
+                <div className="flex items-center space-x-1 mt-4">
+                  <p className="text-sm text-gray-500 mr-2">{t("header.language")}:</p>
+                  {languages.map((lang) => (
+                    <button
+                      key={lang.code}
+                      onClick={() => {
+                        changeLanguage(lang.code)
+                        setMobileMenuOpen(false)
+                      }}
+                      className={`px-2 py-1 rounded-full text-sm flex items-center ${
+                        currentLanguage === lang.code ? "bg-blue-100 text-blue-600" : "text-gray-600 hover:bg-gray-100"
+                      }`}
+                    >
+                      <span className="mr-1">{lang.flag}</span>
+                      <span className="font-medium">{lang.name}</span>
+                    </button>
+                  ))}
+                </div>
               </div>
             </div>
           </motion.div>

@@ -1,0 +1,108 @@
+{
+  "header": {
+    "products": "Products",
+    "solutions": "Solutions",
+    "resources": "Resources",
+    "pricing": "Pricing",
+    "login": "Login",
+    "getStarted": "Get Started",
+    "language": "Language",
+    "dropdown": {
+      "crmSuite": "CRM Suite",
+      "salesAnalytics": "Sales Analytics",
+      "customerInsights": "Customer Insights",
+      "forStartups": "For Startups",
+      "forEnterprise": "For Enterprise",
+      "forAgencies": "For Agencies"
+    }
+  },
+  "hero": {
+    "tagline": "Transforming ideas into technology • 2025",
+    "title": "Advanced technology",
+    "titleHighlight": "solutions",
+    "subtitle": "for your business.",
+    "description": "We develop websites, CRMs, applications, and automations that transform how your company operates and connects with customers.",
+    "cta": {
+      "primary": "Request a Quote",
+      "secondary": "Our Projects"
+    },
+    "stats": "+200 Delivered Projects",
+    "services": {
+      "webDev": "Web Development",
+      "crm": "Custom CRM",
+      "mobile": "Mobile Apps",
+      "automation": "Process Automation"
+    }
+  },
+  "features": {
+    "title": "Our Specialties",
+    "subtitle": "Technology solutions that",
+    "subtitleHighlight": "drive your growth",
+    "description": "We develop custom technologies that perfectly adapt to your business needs.",
+    "items": {
+      "webDev": {
+        "title": "Web Development",
+        "description": "Responsive, fast, and SEO-optimized websites and web applications with exceptional user experiences."
+      },
+      "crm": {
+        "title": "Custom CRM",
+        "description": "Customer relationship management systems tailored to your business's specific needs."
+      },
+      "mobile": {
+        "title": "Mobile Apps",
+        "description": "Native and hybrid applications for iOS and Android that offer seamless experiences to your users."
+      },
+      "automation": {
+        "title": "Process Automation",
+        "description": "Automation solutions that eliminate repetitive tasks and increase your company's operational efficiency."
+      }
+    },
+    "learnMore": "Learn more"
+  },
+  "integration": {
+    "title": "Technology Stack",
+    "subtitle": "Advanced",
+    "subtitleHighlight1": "technologies",
+    "subtitleHighlight2": "innovative",
+    "description": "We use the most modern technologies on the market to develop robust, scalable, and high-performance solutions for your business.",
+    "cta": "Explore Our Stack",
+    "filters": {
+      "all": "All",
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "mobile": "Mobile",
+      "database": "Database",
+      "cloud": "Cloud"
+    }
+  },
+  "footer": {
+    "company": "Transforming ideas into innovative technological solutions to drive your business growth.",
+    "services": "Services",
+    "servicesList": {
+      "webDev": "Web Development",
+      "crm": "Custom CRM",
+      "mobile": "Mobile Apps",
+      "automation": "Process Automation",
+      "consulting": "Technology Consulting"
+    },
+    "about": "Company",
+    "aboutList": {
+      "aboutUs": "About Us",
+      "careers": "Careers",
+      "cases": "Success Cases",
+      "blog": "Blog",
+      "contact": "Contact"
+    },
+    "contact": "Contact",
+    "address": "Technology Ave, 1000<br />São Paulo, SP - Brazil",
+    "phone": "+55 (11) 9999-9999",
+    "email": "contact@cubesoftware.com",
+    "copyright": "All rights reserved.",
+    "legal": {
+      "terms": "Terms",
+      "privacy": "Privacy",
+      "cookies": "Cookies"
+    }
+  }
+}
+

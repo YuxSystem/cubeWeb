@@ -1,6 +1,7 @@
 import type React from "react"
 import "@/app/globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
+import { appWithTranslation } from "next-i18next"
 
 export const metadata = {
   title: "Cube Software - O Assistente de Vendas Definitivo",
@@ -8,7 +9,7 @@ export const metadata = {
     generator: 'v0.dev'
 }
 
-export default function RootLayout({
+function RootLayout({
   children,
 }: {
   children: React.ReactNode
@@ -31,6 +32,8 @@ export default function RootLayout({
     </html>
   )
 }
+
+export default appWithTranslation(RootLayout)
 
 
 

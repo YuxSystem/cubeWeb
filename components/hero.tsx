@@ -7,8 +7,10 @@ import { motion, useScroll, useTransform, useMotionValue, useSpring, AnimatePres
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
 import { Star, ChevronDown, Code, Database, Smartphone, Zap } from "lucide-react"
+import { useTranslation } from "next-i18next"
 
 export default function Hero() {
+  const { t } = useTranslation("common")
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const containerRef = useRef<HTMLDivElement>(null)
   const { scrollY } = useScroll()
@@ -127,7 +129,7 @@ export default function Hero() {
           >
             <Code className="w-4 h-4 mr-2 text-blue-500" />
             <span className="text-sm font-medium bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">
-              Transformando ideias em tecnologia • 2025
+              {t("hero.tagline")}
             </span>
           </motion.div>
 
@@ -138,9 +140,9 @@ export default function Hero() {
             variants={textRevealVariants}
             className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6 leading-tight"
           >
-            Soluções tecnológicas
+            {t("hero.title")}
             <span className="relative ml-2">
-              <span className="text-gradient-blue">avançadas</span>
+              <span className="text-gradient-blue">{t("hero.titleHighlight")}</span>
               <motion.span
                 className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-blue rounded-full"
                 initial={{ scaleX: 0, originX: 0 }}
@@ -156,7 +158,7 @@ export default function Hero() {
               variants={textRevealVariants}
               className="text-gradient-purple"
             >
-              para o seu negócio.
+              {t("hero.subtitle")}
             </motion.span>
           </motion.h1>
 
@@ -167,8 +169,7 @@ export default function Hero() {
             variants={textRevealVariants}
             className="text-xl md:text-2xl text-gray-600 max-w-2xl mb-10"
           >
-            Desenvolvemos sites, CRMs, aplicativos e automações que transformam a maneira como sua empresa opera e se
-            conecta com seus clientes.
+            {t("hero.description")}
           </motion.p>
 
           <motion.div
@@ -182,14 +183,14 @@ export default function Hero() {
               size="lg"
               className="bg-gradient-blue hover:opacity-90 shadow-neon-blue text-lg px-8 py-6 rounded-xl"
             >
-              Solicitar Orçamento
+              {t("hero.cta.primary")}
             </Button>
             <Button
               size="lg"
               variant="outline"
               className="border-blue-200 hover:bg-blue-50 text-lg px-8 py-6 rounded-xl"
             >
-              Nossos Projetos
+              {t("hero.cta.secondary")}
             </Button>
           </motion.div>
 
@@ -231,7 +232,7 @@ export default function Hero() {
                               <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">
                                 <Code className="h-4 w-4 text-blue-600" />
                               </div>
-                              <div className="text-sm font-medium">Desenvolvimento Web</div>
+                              <div className="text-sm font-medium">{t("hero.services.webDev")}</div>
                             </div>
                           )}
 
@@ -240,7 +241,7 @@ export default function Hero() {
                               <div className="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center">
                                 <Database className="h-4 w-4 text-purple-600" />
                               </div>
-                              <div className="text-sm font-medium">CRM Personalizado</div>
+                              <div className="text-sm font-medium">{t("hero.services.crm")}</div>
                             </div>
                           )}
 
@@ -249,7 +250,7 @@ export default function Hero() {
                               <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center">
                                 <Smartphone className="h-4 w-4 text-green-600" />
                               </div>
-                              <div className="text-sm font-medium">Aplicativos Mobile</div>
+                              <div className="text-sm font-medium">{t("hero.services.mobile")}</div>
                             </div>
                           )}
 
@@ -258,7 +259,7 @@ export default function Hero() {
                               <div className="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center">
                                 <Zap className="h-4 w-4 text-amber-600" />
                               </div>
-                              <div className="text-sm font-medium">Automação de Processos</div>
+                              <div className="text-sm font-medium">{t("hero.services.automation")}</div>
                             </div>
                           )}
 
@@ -322,7 +323,7 @@ export default function Hero() {
             ))}
             <span className="ml-2 text-sm font-medium">4.9</span>
             <span className="mx-2 text-gray-300">|</span>
-            <span className="text-sm text-gray-600">+200 Projetos Entregues</span>
+            <span className="text-sm text-gray-600">{t("hero.stats")}</span>
           </motion.div>
 
           {/* Scroll indicator */}

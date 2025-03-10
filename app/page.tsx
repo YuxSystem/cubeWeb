@@ -9,7 +9,7 @@ import Testimonials from "@/components/testimonials"
 import CTA from "@/components/cta"
 import Footer from "@/components/footer"
 
-export default function Home() {
+export default function Page() {
   return (
     <div className="flex flex-col">
       <main>

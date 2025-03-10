@@ -1,0 +1,108 @@
+{
+  "header": {
+    "products": "Produtos",
+    "solutions": "Soluções",
+    "resources": "Recursos",
+    "pricing": "Preços",
+    "login": "Entrar",
+    "getStarted": "Começar Agora",
+    "language": "Idioma",
+    "dropdown": {
+      "crmSuite": "Suite CRM",
+      "salesAnalytics": "Análise de Vendas",
+      "customerInsights": "Insights de Clientes",
+      "forStartups": "Para Startups",
+      "forEnterprise": "Para Empresas",
+      "forAgencies": "Para Agências"
+    }
+  },
+  "hero": {
+    "tagline": "Transformando ideias em tecnologia • 2025",
+    "title": "Soluções tecnológicas",
+    "titleHighlight": "avançadas",
+    "subtitle": "para o seu negócio.",
+    "description": "Desenvolvemos sites, CRMs, aplicativos e automações que transformam a maneira como sua empresa opera e se conecta com seus clientes.",
+    "cta": {
+      "primary": "Solicitar Orçamento",
+      "secondary": "Nossos Projetos"
+    },
+    "stats": "+200 Projetos Entregues",
+    "services": {
+      "webDev": "Desenvolvimento Web",
+      "crm": "CRM Personalizado",
+      "mobile": "Aplicativos Mobile",
+      "automation": "Automação de Processos"
+    }
+  },
+  "features": {
+    "title": "Nossas Especialidades",
+    "subtitle": "Soluções tecnológicas que",
+    "subtitleHighlight": "impulsionam seu crescimento",
+    "description": "Desenvolvemos tecnologias personalizadas que se adaptam perfeitamente às necessidades do seu negócio.",
+    "items": {
+      "webDev": {
+        "title": "Desenvolvimento Web",
+        "description": "Sites e aplicações web responsivas, rápidas e otimizadas para SEO, com experiências de usuário excepcionais."
+      },
+      "crm": {
+        "title": "CRM Personalizado",
+        "description": "Sistemas de gestão de relacionamento com o cliente adaptados às necessidades específicas do seu negócio."
+      },
+      "mobile": {
+        "title": "Aplicativos Mobile",
+        "description": "Aplicativos nativos e híbridos para iOS e Android que oferecem experiências perfeitas aos seus usuários."
+      },
+      "automation": {
+        "title": "Automação de Processos",
+        "description": "Soluções de automação que eliminam tarefas repetitivas e aumentam a eficiência operacional da sua empresa."
+      }
+    },
+    "learnMore": "Saiba mais"
+  },
+  "integration": {
+    "title": "Stack Tecnológica",
+    "subtitle": "Tecnologias",
+    "subtitleHighlight1": "avançadas",
+    "subtitleHighlight2": "inovadoras",
+    "description": "Utilizamos as tecnologias mais modernas do mercado para desenvolver soluções robustas, escaláveis e de alta performance para o seu negócio.",
+    "cta": "Conheça Nossa Stack",
+    "filters": {
+      "all": "Todas",
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "mobile": "Mobile",
+      "database": "Banco de Dados",
+      "cloud": "Cloud"
+    }
+  },
+  "footer": {
+    "company": "Transformando ideias em soluções tecnológicas inovadoras para impulsionar o crescimento do seu negócio.",
+    "services": "Serviços",
+    "servicesList": {
+      "webDev": "Desenvolvimento Web",
+      "crm": "CRM Personalizado",
+      "mobile": "Aplicativos Mobile",
+      "automation": "Automação de Processos",
+      "consulting": "Consultoria Tecnológica"
+    },
+    "about": "Empresa",
+    "aboutList": {
+      "aboutUs": "Sobre Nós",
+      "careers": "Carreiras",
+      "cases": "Casos de Sucesso",
+      "blog": "Blog",
+      "contact": "Contato"
+    },
+    "contact": "Contato",
+    "address": "Av. Tecnologia, 1000<br />São Paulo, SP - Brasil",
+    "phone": "+55 (11) 9999-9999",
+    "email": "contato@cubesoftware.com.br",
+    "copyright": "Todos os direitos reservados.",
+    "legal": {
+      "terms": "Termos",
+      "privacy": "Privacidade",
+      "cookies": "Cookies"
+    }
+  }
+}
+

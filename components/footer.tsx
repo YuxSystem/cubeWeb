@@ -3,8 +3,12 @@
 import Link from "next/link"
 import { Facebook, Twitter, Instagram, Linkedin, Github, Mail, Phone, MapPin } from "lucide-react"
 import { motion } from "framer-motion"
+import { useTranslation } from "next-i18next"
 
 export default function Footer() {
+  const { t } = useTranslation("common")
+  const currentYear = new Date().getFullYear()
+
   return (
     <footer className="bg-black text-gray-400 py-16 relative overflow-hidden">
       <div className="absolute inset-0 bg-pattern-dark opacity-20"></div>
@@ -28,9 +32,7 @@ export default function Footer() {
                 Cube Software
               </span>
             </Link>
-            <p className="mb-6 text-gray-400 max-w-md">
-              Transformando ideias em soluções tecnológicas inovadoras para impulsionar o crescimento do seu negócio.
-            </p>
+            <p className="mb-6 text-gray-400 max-w-md">{t("footer.company")}</p>
             <div className="flex space-x-4">
               <Link href="#" className="text-gray-400 hover:text-white transition-colors">
                 <Facebook className="h-5 w-5" />
@@ -61,31 +63,31 @@ export default function Footer() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            <h3 className="text-white font-semibold mb-4">Serviços</h3>
+            <h3 className="text-white font-semibold mb-4">{t("footer.services")}</h3>
             <ul className="space-y-2">
               <li>
                 <Link href="#" className="hover:text-white transition-colors">
-                  Desenvolvimento Web
+                  {t("footer.servicesList.webDev")}
                 </Link>
               </li>
               <li>
                 <Link href="#" className="hover:text-white transition-colors">
-                  CRM Personalizado
+                  {t("footer.servicesList.crm")}
                 </Link>
               </li>
               <li>
                 <Link href="#" className="hover:text-white transition-colors">
-                  Aplicativos Mobile
+                  {t("footer.servicesList.mobile")}
                 </Link>
               </li>
               <li>
                 <Link href="#" className="hover:text-white transition-colors">
-                  Automação de Processos
+                  {t("footer.servicesList.automation")}
                 </Link>
               </li>
               <li>
                 <Link href="#" className="hover:text-white transition-colors">
-                  Consultoria Tecnológica
+                  {t("footer.servicesList.consulting")}
                 </Link>
               </li>
             </ul>
@@ -97,31 +99,31 @@ export default function Footer() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <h3 className="text-white font-semibold mb-4">Empresa</h3>
+            <h3 className="text-white font-semibold mb-4">{t("footer.about")}</h3>
             <ul className="space-y-2">
               <li>
                 <Link href="#" className="hover:text-white transition-colors">
-                  Sobre Nós
+                  {t("footer.aboutList.aboutUs")}
                 </Link>
               </li>
               <li>
                 <Link href="#" className="hover:text-white transition-colors">
-                  Carreiras
+                  {t("footer.aboutList.careers")}
                 </Link>
               </li>
               <li>
                 <Link href="#" className="hover:text-white transition-colors">
-                  Casos de Sucesso
+                  {t("footer.aboutList.cases")}
                 </Link>
               </li>
               <li>
                 <Link href="#" className="hover:text-white transition-colors">
-                  Blog
+                  {t("footer.aboutList.blog")}
                 </Link>
               </li>
               <li>
                 <Link href="#" className="hover:text-white transition-colors">
-                  Contato
+                  {t("footer.aboutList.contact")}
                 </Link>
               </li>
             </ul>
@@ -133,23 +135,19 @@ export default function Footer() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            <h3 className="text-white font-semibold mb-4">Contato</h3>
+            <h3 className="text-white font-semibold mb-4">{t("footer.contact")}</h3>
             <ul className="space-y-4">
               <li className="flex items-start">
                 <MapPin className="h-5 w-5 text-blue-400 mr-3 mt-0.5" />
-                <span>
-                  Av. Tecnologia, 1000
-                  <br />
-                  São Paulo, SP - Brasil
-                </span>
+                <span dangerouslySetInnerHTML={{ __html: t("footer.address") }}></span>
               </li>
               <li className="flex items-center">
                 <Phone className="h-5 w-5 text-blue-400 mr-3" />
-                <span>+55 (11) 9999-9999</span>
+                <span>{t("footer.phone")}</span>
               </li>
               <li className="flex items-center">
                 <Mail className="h-5 w-5 text-blue-400 mr-3" />
-                <span>contato@cubesoftware.com.br</span>
+                <span>{t("footer.email")}</span>
               </li>
             </ul>
           </motion.div>
@@ -162,16 +160,18 @@ export default function Footer() {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center"
         >
-          <p>&copy; {new Date().getFullYear()} Cube Software. Todos os direitos reservados.</p>
+          <p>
+            &copy; {currentYear} Cube Software. {t("footer.copyright")}
+          </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <Link href="#" className="hover:text-white transition-colors">
-              Termos
+              {t("footer.legal.terms")}
             </Link>
             <Link href="#" className="hover:text-white transition-colors">
-              Privacidade
+              {t("footer.legal.privacy")}
             </Link>
             <Link href="#" className="hover:text-white transition-colors">
-              Cookies
+              {t("footer.legal.cookies")}
             </Link>
           </div>
         </motion.div>
