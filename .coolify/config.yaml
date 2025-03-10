@@ -1,0 +1,21 @@
+version: 3
+
+services:
+  app:
+    type: nextjs
+    port: 3000
+    build:
+      dockerfile: Dockerfile
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+          cpu: 1
+    environment:
+      - NODE_ENV=production
+    healthcheck:
+      path: /
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
