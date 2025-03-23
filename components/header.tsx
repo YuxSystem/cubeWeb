@@ -3,16 +3,13 @@
 import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Menu, X, ChevronDown } from "lucide-react"
+import { Menu, X, ChevronDown, Check } from "lucide-react"
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion"
 import { cn } from "@/lib/utils"
-import { useTranslation } from "next-i18next"
-import { useRouter } from "next/router"
+import { useLanguage } from "@/contexts/language-context"
 
 export default function Header() {
-  const { t } = useTranslation("common")
-  const router = useRouter()
-
+  const { language, setLanguage, t } = useLanguage()
   const [isScrolled, setIsScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
@@ -22,8 +19,6 @@ export default function Header() {
     { code: "en", name: "EN", flag: "🇺🇸" },
     { code: "es", name: "ES", flag: "🇪🇸" },
   ]
-
-  const [currentLanguage, setCurrentLanguage] = useState(router.locale || "pt")
 
   const headerRef = useRef<HTMLDivElement>(null)
 
@@ -41,30 +36,35 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
+  // Close dropdown when clicking outside
   useEffect(() => {
-    // Update currentLanguage when router.locale changes
-    if (router.locale) {
-      setCurrentLanguage(router.locale)
+    const handleClickOutside = (event: MouseEvent) => {
+      if (activeDropdown && headerRef.current && !headerRef.current.contains(event.target as Node)) {
+        setActiveDropdown(null)
+      }
     }
-  }, [router.locale])
+
+    document.addEventListener("mousedown", handleClickOutside)
+    return () => document.removeEventListener("mousedown", handleClickOutside)
+  }, [activeDropdown])
 
   const navItems = [
     {
       name: t("header.products"),
       href: "#products",
       dropdown: [
-        { name: t("header.dropdown.crmSuite"), href: "#crm-suite" },
-        { name: t("header.dropdown.salesAnalytics"), href: "#sales-analytics" },
-        { name: t("header.dropdown.customerInsights"), href: "#customer-insights" },
+        { name: t("dropdown.crmSuite"), href: "#crm-suite" },
+        { name: t("dropdown.salesAnalytics"), href: "#sales-analytics" },
+        { name: t("dropdown.customerInsights"), href: "#customer-insights" },
       ],
     },
     {
       name: t("header.solutions"),
       href: "#solutions",
       dropdown: [
-        { name: t("header.dropdown.forStartups"), href: "#for-startups" },
-        { name: t("header.dropdown.forEnterprise"), href: "#for-enterprise" },
-        { name: t("header.dropdown.forAgencies"), href: "#for-agencies" },
+        { name: t("dropdown.forStartups"), href: "#for-startups" },
+        { name: t("dropdown.forEnterprise"), href: "#for-enterprise" },
+        { name: t("dropdown.forAgencies"), href: "#for-agencies" },
       ],
     },
     { name: t("header.resources"), href: "#resources" },
@@ -79,9 +79,8 @@ export default function Header() {
     }
   }
 
-  const changeLanguage = (langCode: string) => {
-    setCurrentLanguage(langCode)
-    router.push(router.pathname, router.asPath, { locale: langCode })
+  const changeLanguage = (langCode: "pt" | "en" | "es") => {
+    setLanguage(langCode)
   }
 
   return (
@@ -89,7 +88,7 @@ export default function Header() {
       ref={headerRef}
       className={cn(
         "fixed top-0 w-full z-50 transition-all duration-300",
-        isScrolled ? "glass backdrop-blur-md" : "bg-transparent",
+        isScrolled ? "glass backdrop-blur-md shadow-sm" : "bg-transparent",
       )}
       style={{
         opacity: headerOpacity,
@@ -173,21 +172,54 @@ export default function Header() {
                 )}
               </div>
             ))}
-            <div className="flex items-center space-x-1 ml-8">
-              {languages.map((lang) => (
-                <motion.button
-                  key={lang.code}
-                  onClick={() => changeLanguage(lang.code)}
-                  className={`px-2 py-1 rounded-full text-sm flex items-center ${
-                    currentLanguage === lang.code ? "bg-blue-100 text-blue-600" : "text-gray-600 hover:bg-gray-100"
-                  }`}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <span className="mr-1">{lang.flag}</span>
-                  <span className="font-medium">{lang.name}</span>
-                </motion.button>
-              ))}
+            <div className="relative ml-8">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setActiveDropdown(activeDropdown === "language" ? null : "language")}
+                className="flex items-center gap-1.5 px-3 py-2 rounded-full hover:bg-blue-50 transition-colors"
+              >
+                <span className="text-lg">{languages.find((l) => l.code === language)?.flag}</span>
+                <span className="font-medium text-gray-700">{language.toUpperCase()}</span>
+                <ChevronDown
+                  className={`h-4 w-4 text-gray-500 transition-transform ${activeDropdown === "language" ? "rotate-180" : ""}`}
+                />
+              </Button>
+
+              {activeDropdown === "language" && (
+                <AnimatePresence>
+                  <motion.div
+                    initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                    transition={{ duration: 0.15 }}
+                    className="absolute right-0 mt-1 w-40 glass rounded-xl shadow-neon-blue overflow-hidden z-50"
+                  >
+                    <div className="py-1">
+                      {languages.map((lang) => (
+                        <button
+                          key={lang.code}
+                          onClick={() => {
+                            changeLanguage(lang.code as "pt" | "en" | "es")
+                            setActiveDropdown(null)
+                          }}
+                          className={`flex items-center w-full px-4 py-2.5 text-left ${
+                            language === lang.code
+                              ? "bg-blue-50 text-blue-600"
+                              : "text-gray-700 hover:bg-blue-50 hover:text-blue-600"
+                          } transition-colors`}
+                        >
+                          <span className="text-lg mr-2">{lang.flag}</span>
+                          <span className="font-medium">
+                            {lang.name === "PT" ? "Português" : lang.name === "EN" ? "English" : "Español"}
+                          </span>
+                          {language === lang.code && <Check className="ml-auto h-4 w-4" />}
+                        </button>
+                      ))}
+                    </div>
+                  </motion.div>
+                </AnimatePresence>
+              )}
             </div>
           </motion.nav>
 
@@ -291,24 +323,33 @@ export default function Header() {
                 >
                   {t("header.login")}
                 </Link>
-                <Button className="w-full mt-2 bg-gradient-blue hover:opacity-90 shadow-neon-blue">
+                <Button
+                  className="w-full mt-2 bg-gradient-blue hover:opacity-90 shadow-neon-blue"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
                   {t("header.getStarted")}
                 </Button>
-                <div className="flex items-center space-x-1 mt-4">
-                  <p className="text-sm text-gray-500 mr-2">{t("header.language")}:</p>
+              </div>
+              <div className="mt-4 pt-4 border-t border-gray-200">
+                <p className="text-sm text-gray-500 mb-2">{t("header.language")}:</p>
+                <div className="grid grid-cols-3 gap-2">
                   {languages.map((lang) => (
                     <button
                       key={lang.code}
                       onClick={() => {
-                        changeLanguage(lang.code)
+                        changeLanguage(lang.code as "pt" | "en" | "es")
                         setMobileMenuOpen(false)
                       }}
-                      className={`px-2 py-1 rounded-full text-sm flex items-center ${
-                        currentLanguage === lang.code ? "bg-blue-100 text-blue-600" : "text-gray-600 hover:bg-gray-100"
+                      className={`flex flex-col items-center justify-center p-3 rounded-lg transition-all ${
+                        language === lang.code
+                          ? "bg-blue-100 text-blue-600 shadow-sm"
+                          : "bg-gray-50 text-gray-600 hover:bg-gray-100"
                       }`}
                     >
-                      <span className="mr-1">{lang.flag}</span>
-                      <span className="font-medium">{lang.name}</span>
+                      <span className="text-2xl mb-1">{lang.flag}</span>
+                      <span className="font-medium text-sm">
+                        {lang.name === "PT" ? "Português" : lang.name === "EN" ? "English" : "Español"}
+                      </span>
                     </button>
                   ))}
                 </div>

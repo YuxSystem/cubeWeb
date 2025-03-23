@@ -3,39 +3,10 @@
 import { useRef, useState } from "react"
 import { motion, useInView, useScroll, useTransform } from "framer-motion"
 import { Code, Database, Smartphone, Zap, ArrowRight } from "lucide-react"
-
-const features = [
-  {
-    icon: <Code className="w-8 h-8" />,
-    title: "Desenvolvimento Web",
-    description:
-      "Sites e aplicações web responsivas, rápidas e otimizadas para SEO, com experiências de usuário excepcionais.",
-    color: "blue",
-  },
-  {
-    icon: <Database className="w-8 h-8" />,
-    title: "CRM Personalizado",
-    description:
-      "Sistemas de gestão de relacionamento com o cliente adaptados às necessidades específicas do seu negócio.",
-    color: "purple",
-  },
-  {
-    icon: <Smartphone className="w-8 h-8" />,
-    title: "Aplicativos Mobile",
-    description:
-      "Aplicativos nativos e híbridos para iOS e Android que oferecem experiências perfeitas aos seus usuários.",
-    color: "pink",
-  },
-  {
-    icon: <Zap className="w-8 h-8" />,
-    title: "Automação de Processos",
-    description:
-      "Soluções de automação que eliminam tarefas repetitivas e aumentam a eficiência operacional da sua empresa.",
-    color: "amber",
-  },
-]
+import { useLanguage } from "@/contexts/language-context"
 
 export default function Features() {
+  const { t } = useLanguage()
   const containerRef = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -45,8 +16,39 @@ export default function Features() {
   const y = useTransform(scrollYProgress, [0, 1], [100, -100])
   const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0])
 
+  const features = [
+    {
+      icon: <Code className="w-8 h-8" />,
+      title: t("services.webDev"),
+      description:
+        "Sites e aplicações web responsivas, rápidas e otimizadas para SEO, com experiências de usuário excepcionais.",
+      color: "blue",
+    },
+    {
+      icon: <Database className="w-8 h-8" />,
+      title: t("services.crm"),
+      description:
+        "Sistemas de gestão de relacionamento com o cliente adaptados às necessidades específicas do seu negócio.",
+      color: "purple",
+    },
+    {
+      icon: <Smartphone className="w-8 h-8" />,
+      title: t("services.mobile"),
+      description:
+        "Aplicativos nativos e híbridos para iOS e Android que oferecem experiências perfeitas aos seus usuários.",
+      color: "pink",
+    },
+    {
+      icon: <Zap className="w-8 h-8" />,
+      title: t("services.automation"),
+      description:
+        "Soluções de automação que eliminam tarefas repetitivas e aumentam a eficiência operacional da sua empresa.",
+      color: "amber",
+    },
+  ]
+
   return (
-    <section ref={containerRef} className="py-32 relative overflow-hidden pattern-dots">
+    <section ref={containerRef} id="features" className="py-32 relative overflow-hidden pattern-dots">
       <motion.div
         className="absolute inset-0 bg-gradient-to-b from-white via-blue-50 to-white opacity-70"
         style={{ opacity }}

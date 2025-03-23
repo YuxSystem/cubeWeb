@@ -7,10 +7,10 @@ import { motion, useScroll, useTransform, useMotionValue, useSpring, AnimatePres
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
 import { Star, ChevronDown, Code, Database, Smartphone, Zap } from "lucide-react"
-import { useTranslation } from "next-i18next"
+import { useLanguage } from "@/contexts/language-context"
 
 export default function Hero() {
-  const { t } = useTranslation("common")
+  const { t } = useLanguage()
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const containerRef = useRef<HTMLDivElement>(null)
   const { scrollY } = useScroll()
@@ -232,7 +232,7 @@ export default function Hero() {
                               <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">
                                 <Code className="h-4 w-4 text-blue-600" />
                               </div>
-                              <div className="text-sm font-medium">{t("hero.services.webDev")}</div>
+                              <div className="text-sm font-medium">{t("services.webDev")}</div>
                             </div>
                           )}
 
@@ -241,7 +241,7 @@ export default function Hero() {
                               <div className="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center">
                                 <Database className="h-4 w-4 text-purple-600" />
                               </div>
-                              <div className="text-sm font-medium">{t("hero.services.crm")}</div>
+                              <div className="text-sm font-medium">{t("services.crm")}</div>
                             </div>
                           )}
 
@@ -250,7 +250,7 @@ export default function Hero() {
                               <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center">
                                 <Smartphone className="h-4 w-4 text-green-600" />
                               </div>
-                              <div className="text-sm font-medium">{t("hero.services.mobile")}</div>
+                              <div className="text-sm font-medium">{t("services.mobile")}</div>
                             </div>
                           )}
 
@@ -259,7 +259,7 @@ export default function Hero() {
                               <div className="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center">
                                 <Zap className="h-4 w-4 text-amber-600" />
                               </div>
-                              <div className="text-sm font-medium">{t("hero.services.automation")}</div>
+                              <div className="text-sm font-medium">{t("services.automation")}</div>
                             </div>
                           )}
 
